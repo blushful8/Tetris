@@ -38,7 +38,7 @@ public class Block {
         PURPLE(Color.rgb(150, 0, 205), (byte) 2),
         GREEN(Color.rgb(0, 128, 0), (byte) 2),
         ORANGE(Color.rgb(255, 140, 0), (byte) 2),
-        SILVER(Color.rgb(196, 202, 206), (byte) 2),
+        BLUE(Color.rgb(100, 224, 230), (byte) 2),
         RED(Color.rgb(128, 0, 0), (byte) 2);
 
         BlockColor(int rgbValue, byte byteValue) {

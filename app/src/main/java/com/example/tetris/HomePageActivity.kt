@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
+import com.example.tetris.storage.AppReferences
+import com.google.android.material.snackbar.Snackbar
 
 private var exit: AppCompatButton? = null
 private var reset: AppCompatButton? = null
@@ -14,6 +16,7 @@ private var newGame: AppCompatButton? = null
 
 @SuppressLint("StaticFieldLeak")
 lateinit var highScore: TextView
+var appReferences: AppReferences? = null
 
 class HomePageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,13 +25,17 @@ class HomePageActivity : AppCompatActivity() {
         supportActionBar?.hide()
         init()
 
+        highScore.text = "High score: ${appReferences?.getHighScore()}"
+
         newGame?.setOnClickListener(this::onBtnGameClick)
         exit?.setOnClickListener(this::onBtnExitClick)
         reset?.setOnClickListener(this::onBtnResetClick)
     }
 
     private fun onBtnResetClick(view: View) {
-
+        val prefenrences = AppReferences(this)
+        Snackbar.make(view, "Score successfuly reset", Snackbar.LENGTH_SHORT).show()
+        highScore.text = "High score: ${prefenrences.clearHighScore()}"
     }
 
     private fun onBtnExitClick(view: View) {
@@ -45,5 +52,6 @@ class HomePageActivity : AppCompatActivity() {
         newGame = findViewById(R.id.btn_new_game)
         reset = findViewById(R.id.btn_res_score)
         highScore = findViewById(R.id.tv_high_score)
+        appReferences = AppReferences(this)
     }
 }
