@@ -25,7 +25,7 @@ class HomePageActivity : AppCompatActivity() {
         supportActionBar?.hide()
         init()
 
-        highScore.text = "High score: ${appReferences?.getHighScore()}"
+        highScore.text = "High score: 0"
 
         newGame?.setOnClickListener(this::onBtnGameClick)
         exit?.setOnClickListener(this::onBtnExitClick)
@@ -36,10 +36,21 @@ class HomePageActivity : AppCompatActivity() {
         val prefenrences = AppReferences(this)
         Snackbar.make(view, "Score successfuly reset", Snackbar.LENGTH_SHORT).show()
         highScore.text = "High score: ${prefenrences.clearHighScore()}"
+        highScore.text = "High score: 0"
     }
 
     private fun onBtnExitClick(view: View) {
         System.exit(0)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        highScore.text = "High score: ${appReferences?.getHighScore()}"
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        highScore.text = "High score: ${appReferences?.getHighScore()}"
     }
 
     private fun onBtnGameClick(view: View) {
